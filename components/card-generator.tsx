@@ -19,7 +19,7 @@ import { Share2, Download, RotateCw, Eye, EyeOff, FileSignature } from "lucide-r
 export type BackgroundOption = {
   id: string
   name: string
-  thumbnail?: string
+  thumbnail: string
   image?: string
 }
 
@@ -28,7 +28,7 @@ export const BACKGROUND_OPTIONS: BackgroundOption[] = [
   {
     id: "default",
     name: "Default Gradient",
-    thumbnail: "",
+    thumbnail: "/backgrounds/default-thumb.png",
     image: "",
   },
   {
@@ -58,7 +58,7 @@ export const BACKGROUND_OPTIONS: BackgroundOption[] = [
   {
     id: "combined",
     name: "Combined Design",
-    thumbnail: "",
+    thumbnail: "/backgrounds/combined-thumb.png",
     image: "",
   },
 ]
