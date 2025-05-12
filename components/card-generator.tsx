@@ -125,7 +125,7 @@ export function CardGenerator() {
     if (!combinedCardRef.current) return
 
     try {
-      const dataUrl = await toPng(combinedCardRef.current, {
+      await toPng(combinedCardRef.current, {
         quality: 1.0,
         pixelRatio: 2,
         backgroundColor: "#0f172a",
