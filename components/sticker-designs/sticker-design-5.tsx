@@ -1,4 +1,6 @@
-import type { BackgroundOption } from "../background-selector"
+"use client"
+
+import type { BackgroundOption } from "../card-generator"
 
 interface StickerDesignProps {
   name: string
@@ -6,6 +8,9 @@ interface StickerDesignProps {
 }
 
 export function StickerDesign5({ name, background }: StickerDesignProps) {
+  // Format name with .sign suffix
+  const displayName = name ? `${name}.sign` : ""
+
   return (
     <div className="relative w-64 h-64">
       {/* Hexagon shape with border */}
@@ -15,14 +20,14 @@ export function StickerDesign5({ name, background }: StickerDesignProps) {
           <svg viewBox="0 0 100 100" className="absolute inset-0 w-full h-full">
             <defs>
               <linearGradient id="hexGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#f97316" />
-                <stop offset="100%" stopColor="#fbbf24" />
+                <stop offset="0%" stopColor="#ff7b00" />
+                <stop offset="100%" stopColor="#ff5500" />
               </linearGradient>
             </defs>
             <polygon
               points="50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25"
               fill="url(#hexGradient)"
-              className="drop-shadow-lg"
+              style={{ filter: "drop-shadow(0 4px 3px rgb(0 0 0 / 0.07))" }}
             />
             <polygon points="50 5, 88.3 27.5, 88.3 72.5, 50 95, 11.7 72.5, 11.7 27.5" fill="#1f2937" />
           </svg>
@@ -55,7 +60,7 @@ export function StickerDesign5({ name, background }: StickerDesignProps) {
 
             {/* Name */}
             <div className="text-white font-medium text-sm mb-2 max-w-[80%] text-center truncate drop-shadow-md">
-              {name}
+              {displayName}
             </div>
 
             {/* Chip */}

@@ -10,7 +10,7 @@ const dancingScript = Dancing_Script({
 })
 
 export const metadata: Metadata = {
-  title: "Virtual Crypto Card Generator",
+  title: "Sign Virtual Crypto Card Generator",
   description: "Create your personalized virtual debit card with your name or username",
 }
 

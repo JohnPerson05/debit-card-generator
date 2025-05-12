@@ -1,4 +1,6 @@
-import type { BackgroundOption } from "../background-selector"
+"use client"
+
+import type { BackgroundOption } from "../card-generator"
 
 interface StickerDesignProps {
   name: string
@@ -6,6 +8,9 @@ interface StickerDesignProps {
 }
 
 export function StickerDesign4({ name, background }: StickerDesignProps) {
+  // Format name with .sign suffix
+  const displayName = name ? `${name}.sign` : ""
+
   return (
     <div className="relative w-64 h-64">
       {/* Square design with rounded corners */}
@@ -38,7 +43,7 @@ export function StickerDesign4({ name, background }: StickerDesignProps) {
 
         {/* Name */}
         <div className="text-white font-medium text-sm mb-3 max-w-[80%] text-center truncate z-10 drop-shadow-md">
-          {name}
+          {displayName}
         </div>
 
         {/* Card circles */}

@@ -55,3 +55,94 @@ body {
 .font-signature {
   font-family: var(--font-signature);
 }
+
+/* Orange theme styles */
+.orange-gradient {
+  background: linear-gradient(135deg, #ff7b00, #ff5500);
+}
+
+.orange-glow {
+  box-shadow: 0 0 15px rgba(255, 123, 0, 0.5);
+}
+
+.orange-border {
+  border: 2px solid #ff7b00;
+}
+
+.orange-text {
+  color: #ff7b00;
+}
+
+.orange-bg {
+  background-color: #ff7b00;
+}
+
+/* Holographic effect */
+.holographic {
+  position: relative;
+}
+
+.holographic::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    125deg,
+    rgba(255, 123, 0, 0) 0%,
+    rgba(255, 123, 0, 0.1) 25%,
+    rgba(255, 123, 0, 0.3) 50%,
+    rgba(255, 123, 0, 0.1) 75%,
+    rgba(255, 123, 0, 0) 100%
+  );
+  background-size: 200% 200%;
+  animation: holographic-shift 3s ease infinite;
+  pointer-events: none;
+  z-index: 20;
+  border-radius: inherit;
+}
+
+/* Add shape-specific holographic effects */
+.holographic-circle {
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.holographic-hexagon {
+  overflow: hidden;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25' fill='black'/%3E%3C/svg%3E");
+  mask: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpolygon points='50 0, 93.3 25, 93.3 75, 50 100, 6.7 75, 6.7 25' fill='black'/%3E%3C/svg%3E");
+}
+
+/* Update the holographic-card class to better fit the card shape */
+.holographic-card {
+  border-radius: 1rem;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Add a specific class for the combined view cards */
+.combined-card-container {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.holographic-rectangle {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+@keyframes holographic-shift {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}

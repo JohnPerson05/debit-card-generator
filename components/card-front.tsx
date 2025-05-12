@@ -13,6 +13,9 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
   const [cardNumber, setCardNumber] = useState("")
   const [expiryDate, setExpiryDate] = useState("")
 
+  // Format name with .sign suffix
+  const displayName = name ? `${name}.sign` : ""
+
   // Generate card details on component mount
   useEffect(() => {
     setCardNumber(generateCardNumber())
@@ -44,11 +47,24 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
 
   const renderBackground = () => {
     if (!designType)
-      return <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-400 to-gray-900 z-0"></div>
+      return <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-800 z-0"></div>
 
     switch (designType.id) {
       case "default":
-        return <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-400 to-gray-900 z-0"></div>
+        return (
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-800 z-0"></div>
+        )
+      case "custom":
+        return (
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <img
+              src={designType.image || "/placeholder.svg"}
+              alt="Custom background"
+              className="absolute inset-0 w-full h-full object-cover opacity-60"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 to-orange-800/70"></div>
+          </div>
+        )
       case "design1":
         return (
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -57,7 +73,7 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
               alt="Orange cartoon character"
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/40 to-gray-900/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 to-orange-800/70"></div>
           </div>
         )
       case "design2":
@@ -68,7 +84,7 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
               alt="Anime girl with flowers"
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/40 to-gray-900/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 to-orange-800/70"></div>
           </div>
         )
       case "design3":
@@ -79,7 +95,7 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
               alt="Dark-haired anime woman"
               className="absolute inset-0 w-full h-full object-cover opacity-60"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/40 to-gray-900/70"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-600/40 to-orange-800/70"></div>
           </div>
         )
       case "combined":
@@ -100,11 +116,13 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
                 </div>
               ))}
             </div>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-500/30 to-gray-900/60"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-orange-600/30 to-orange-800/60"></div>
           </div>
         )
       default:
-        return <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-amber-400 to-gray-900 z-0"></div>
+        return (
+          <div className="absolute inset-0 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-800 z-0"></div>
+        )
     }
   }
 
@@ -126,8 +144,8 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
 
         {/* Middle section - Chip */}
         <div className="flex items-center mt-4">
-          <div className="w-10 h-8 bg-gradient-to-br from-yellow-200 to-yellow-400 rounded-md mr-3 grid place-items-center">
-            <div className="w-7 h-5 bg-gradient-to-br from-yellow-300 to-yellow-500 rounded-sm"></div>
+          <div className="w-10 h-8 bg-gradient-to-br from-yellow-200 to-orange-400 rounded-md mr-3 grid place-items-center">
+            <div className="w-7 h-5 bg-gradient-to-br from-yellow-300 to-orange-500 rounded-sm"></div>
           </div>
         </div>
 
@@ -139,12 +157,12 @@ export function CardFront({ name, showCardNumber, designType }: CardFrontProps) 
         {/* Bottom section */}
         <div className="flex justify-between items-end mt-4">
           <div>
-            <p className="text-xs text-gray-200 uppercase mb-1">CARD HOLDER</p>
-            <p className="text-white font-medium text-sm truncate max-w-[150px]">{name}</p>
+            <p className="text-xs text-orange-100 uppercase mb-1">CARD HOLDER</p>
+            <p className="text-white font-medium text-sm truncate max-w-[150px]">{displayName}</p>
           </div>
 
           <div className="text-right">
-            <p className="text-xs text-gray-200 uppercase mb-1">EXPIRES</p>
+            <p className="text-xs text-orange-100 uppercase mb-1">EXPIRES</p>
             <p className="text-white font-medium text-sm">{expiryDate}</p>
           </div>
         </div>

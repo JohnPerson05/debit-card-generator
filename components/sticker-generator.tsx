@@ -9,11 +9,17 @@ import { StickerDesign2 } from "./sticker-designs/sticker-design-2"
 import { StickerDesign3 } from "./sticker-designs/sticker-design-3"
 import { StickerDesign4 } from "./sticker-designs/sticker-design-4"
 import { StickerDesign5 } from "./sticker-designs/sticker-design-5"
+import { StickerDesign6 } from "./sticker-designs/sticker-design-6"
+import { StickerDesign7 } from "./sticker-designs/sticker-design-7"
 import type { BackgroundOption } from "./card-generator"
+import { BackgroundSpecificStickers } from "./background-specific-stickers"
+import { CustomStickerGenerator } from "./custom-sticker-generator"
 
 interface StickerGeneratorProps {
   name: string
   designType: BackgroundOption
+  signatureData?: string | null
+  customBackground?: BackgroundOption | null
 }
 
 const STICKER_DESIGNS = [
@@ -42,9 +48,19 @@ const STICKER_DESIGNS = [
     name: "Modern Badge",
     component: StickerDesign5,
   },
+  {
+    id: "design6",
+    name: "Card Front",
+    component: StickerDesign6,
+  },
+  {
+    id: "design7",
+    name: "Card Back",
+    component: StickerDesign7,
+  },
 ]
 
-export function StickerGenerator({ name, designType }: StickerGeneratorProps) {
+export function StickerGenerator({ name, designType, signatureData, customBackground }: StickerGeneratorProps) {
   const [currentDesignIndex, setCurrentDesignIndex] = useState(0)
   const stickerRef = useRef<HTMLDivElement>(null)
 
@@ -70,7 +86,7 @@ export function StickerGenerator({ name, designType }: StickerGeneratorProps) {
       })
 
       const link = document.createElement("a")
-      link.download = `sign-card-sticker-${currentDesign.id}.png`
+      link.download = `sign-card-sticker-${currentDesign.id}-${designType.id}.png`
       link.href = dataUrl
       link.click()
     } catch (error) {
@@ -80,8 +96,8 @@ export function StickerGenerator({ name, designType }: StickerGeneratorProps) {
 
   return (
     <div className="w-full">
-      <h3 className="text-xl font-bold text-white mb-4">Card Stickers for Keychains</h3>
-      <p className="text-gray-400 mb-6">
+      <h3 className="text-xl font-bold text-orange-300 mb-4">Card Stickers for Keychains</h3>
+      <p className="text-orange-200 mb-6">
         Choose from different sticker designs that you can download and use as keychains.
       </p>
 
@@ -91,18 +107,18 @@ export function StickerGenerator({ name, designType }: StickerGeneratorProps) {
             variant="outline"
             size="icon"
             onClick={prevDesign}
-            className="bg-slate-800 text-white hover:bg-slate-700 border-slate-700"
+            className="bg-orange-900/50 text-orange-100 hover:bg-orange-800 border-orange-700"
           >
             <ChevronLeft className="h-4 w-4" />
           </Button>
-          <span className="text-white font-medium">
+          <span className="text-orange-200 font-medium">
             {currentDesignIndex + 1}/{STICKER_DESIGNS.length}: {currentDesign.name}
           </span>
           <Button
             variant="outline"
             size="icon"
             onClick={nextDesign}
-            className="bg-slate-800 text-white hover:bg-slate-700 border-slate-700"
+            className="bg-orange-900/50 text-orange-100 hover:bg-orange-800 border-orange-700"
           >
             <ChevronRight className="h-4 w-4" />
           </Button>
@@ -113,17 +129,38 @@ export function StickerGenerator({ name, designType }: StickerGeneratorProps) {
           className="mb-6 p-4 flex items-center justify-center bg-transparent"
           style={{ width: "300px", height: "300px" }}
         >
-          <StickerComponent name={name} background={designType} />
+          <div
+            className={`holographic ${
+              currentDesign.id.includes("design1") ||
+              currentDesign.id.includes("design2") ||
+              currentDesign.id.includes("design3") ||
+              currentDesign.id.includes("circle")
+                ? "holographic-circle"
+                : currentDesign.id.includes("design5")
+                  ? "holographic-hexagon"
+                  : "holographic-card"
+            }`}
+          >
+            {currentDesign.id === "design7" ? (
+              <StickerDesign7 name={name} background={designType} signatureData={signatureData} />
+            ) : (
+              <StickerComponent name={name} background={designType} />
+            )}
+          </div>
         </div>
 
         <Button
           onClick={downloadSticker}
-          className="flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white"
+          className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 text-white"
         >
           <Download className="h-4 w-4" />
           Download Sticker
         </Button>
       </div>
+
+      <BackgroundSpecificStickers name={name} signatureData={signatureData} customBackground={customBackground} />
+
+      <CustomStickerGenerator name={name} signatureData={signatureData} />
     </div>
   )
 }

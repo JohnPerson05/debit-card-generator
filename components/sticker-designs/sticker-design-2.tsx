@@ -8,6 +8,9 @@ interface StickerDesignProps {
 }
 
 export function StickerDesign2({ name, background }: StickerDesignProps) {
+  // Format name with .sign suffix
+  const displayName = name ? `${name}.sign` : ""
+
   const renderBackground = () => {
     if (!background)
       return (
@@ -62,6 +65,7 @@ export function StickerDesign2({ name, background }: StickerDesignProps) {
       case "design1":
       case "design2":
       case "design3":
+      case "custom":
         return (
           <div className="absolute inset-0 rounded-full bg-white p-2">
             <div className="w-full h-full rounded-full bg-gray-900 flex flex-col items-center justify-center p-4 relative overflow-hidden">
@@ -137,7 +141,7 @@ export function StickerDesign2({ name, background }: StickerDesignProps) {
         <div className="text-xl font-serif italic text-white mb-3 drop-shadow-md">Sign</div>
 
         {/* Name */}
-        <div className="text-white font-medium text-sm mb-3 max-w-[80%] text-center truncate">{name}</div>
+        <div className="text-white font-medium text-sm mb-3 max-w-[80%] text-center truncate">{displayName}</div>
 
         {/* Card circles */}
         <div className="flex mb-2">

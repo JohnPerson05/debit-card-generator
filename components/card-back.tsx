@@ -16,7 +16,18 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
 
     switch (designType.id) {
       case "default":
-        return <div className="absolute inset-0 bg-gray-900 z-0"></div>
+        return <div className="absolute inset-0 bg-orange-950 z-0"></div>
+      case "custom":
+        return (
+          <div className="absolute inset-0 z-0 overflow-hidden">
+            <img
+              src={designType.image || "/placeholder.svg"}
+              alt="Custom background"
+              className="absolute inset-0 w-full h-full object-cover opacity-30"
+            />
+            <div className="absolute inset-0 bg-orange-950/80"></div>
+          </div>
+        )
       case "design1":
         return (
           <div className="absolute inset-0 z-0 overflow-hidden">
@@ -25,7 +36,7 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
               alt="Orange cartoon character"
               className="absolute inset-0 w-full h-full object-cover opacity-30"
             />
-            <div className="absolute inset-0 bg-gray-900/80"></div>
+            <div className="absolute inset-0 bg-orange-950/80"></div>
           </div>
         )
       case "design2":
@@ -36,7 +47,7 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
               alt="Anime girl with flowers"
               className="absolute inset-0 w-full h-full object-cover opacity-30"
             />
-            <div className="absolute inset-0 bg-gray-900/80"></div>
+            <div className="absolute inset-0 bg-orange-950/80"></div>
           </div>
         )
       case "design3":
@@ -47,7 +58,7 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
               alt="Dark-haired anime woman"
               className="absolute inset-0 w-full h-full object-cover opacity-30"
             />
-            <div className="absolute inset-0 bg-gray-900/80"></div>
+            <div className="absolute inset-0 bg-orange-950/80"></div>
           </div>
         )
       case "combined":
@@ -68,11 +79,11 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
                 </div>
               ))}
             </div>
-            <div className="absolute inset-0 bg-gray-900/80"></div>
+            <div className="absolute inset-0 bg-orange-950/80"></div>
           </div>
         )
       default:
-        return <div className="absolute inset-0 bg-gray-900 z-0"></div>
+        return <div className="absolute inset-0 bg-orange-950 z-0"></div>
     }
   }
 
@@ -82,14 +93,14 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
       {renderBackground()}
 
       {/* Gradient accent */}
-      <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-b from-orange-500 to-amber-400 z-10"></div>
+      <div className="absolute top-0 left-0 w-12 h-full bg-gradient-to-b from-orange-500 to-orange-600 z-10"></div>
 
       {/* Magnetic stripe */}
       <div className="absolute top-8 left-12 right-0 h-10 bg-black z-20"></div>
 
       {/* Card issuer info */}
       <div className="absolute top-24 left-20 right-6 z-20">
-        <p className="text-gray-400 text-[7px] leading-tight">
+        <p className="text-orange-200 text-[7px] leading-tight">
           This card is issued by Sign Financial Services pursuant to license by Mastercard International.
         </p>
       </div>
@@ -98,8 +109,8 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
       <div className="absolute bottom-20 left-20 right-6 z-20">
         <div className="flex flex-col">
           <div className="flex justify-between items-center mb-1">
-            <span className="text-gray-400 text-[6px]">AUTHORIZED SIGNATURE</span>
-            <span className="text-gray-400 text-[6px]">NOT VALID UNLESS SIGNED</span>
+            <span className="text-orange-200 text-[6px]">AUTHORIZED SIGNATURE</span>
+            <span className="text-orange-200 text-[6px]">NOT VALID UNLESS SIGNED</span>
           </div>
           <div className="flex justify-between gap-4">
             <div className="bg-white h-12 flex-grow rounded-sm flex items-center justify-center relative">
@@ -123,7 +134,7 @@ export function CardBack({ signatureData, designType }: CardBackProps) {
 
       {/* Terms and conditions */}
       <div className="absolute bottom-6 left-20 right-6 z-20">
-        <p className="text-gray-400 text-[6px] leading-tight">
+        <p className="text-orange-200 text-[6px] leading-tight">
           Use of this card is subject to the agreement and terms and conditions of the cardholder agreement. By using
           this card, you agree to the terms and conditions set forth by the issuer.
         </p>
