@@ -8,7 +8,7 @@ export type BackgroundOption = {
   id: string
   name: string
   thumbnail: string
-  image: string
+  image?: string
 }
 
 // Define the background options
