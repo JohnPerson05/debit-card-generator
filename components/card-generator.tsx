@@ -29,7 +29,7 @@ export type BackgroundOption = {
 export const BACKGROUND_OPTIONS: BackgroundOption[] = [
   {
     id: "default",
-    name: "Default Gradient",
+    name: "Default",
     thumbnail: "",
     image: "",
   },
@@ -59,7 +59,7 @@ export const BACKGROUND_OPTIONS: BackgroundOption[] = [
   },
   {
     id: "combined",
-    name: "Combined Design",
+    name: "$SIGN BUILDER",
     thumbnail: "",
     image: "",
   },
