@@ -69,14 +69,25 @@ export function StickerDesign2({ name, background }: StickerDesignProps) {
         return (
           <div className="absolute inset-0 rounded-full bg-white p-2">
             <div className="w-full h-full rounded-full bg-gray-900 flex flex-col items-center justify-center p-4 relative overflow-hidden">
-              <div className="absolute inset-0 opacity-50">
-                <img
-                  src={background.image || "/placeholder.svg"}
-                  alt={background.name}
-                  className="absolute inset-0 w-full h-full object-cover"
-                />
-                <div className="absolute inset-0 bg-gray-900/60"></div>
-              </div>
+              {background.image && (
+                <div className="absolute inset-0 opacity-50">
+                  <img
+                    src={background.image || "/placeholder.svg"}
+                    alt={background.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onError={(e) => {
+                      // If image fails to load, replace with gradient
+                      e.currentTarget.style.display = "none"
+                      e.currentTarget.parentElement!.classList.add(
+                        "bg-gradient-to-br",
+                        "from-orange-800/40",
+                        "to-gray-900/60",
+                      )
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-gray-900/60"></div>
+                </div>
+              )}
             </div>
           </div>
         )
@@ -95,6 +106,15 @@ export function StickerDesign2({ name, background }: StickerDesignProps) {
                       src={src || "/placeholder.svg"}
                       alt={`Design ${index + 1}`}
                       className="absolute inset-0 w-full h-full object-cover opacity-50"
+                      onError={(e) => {
+                        // If image fails to load, replace with gradient
+                        e.currentTarget.style.display = "none"
+                        e.currentTarget.parentElement!.classList.add(
+                          "bg-gradient-to-br",
+                          "from-orange-800/40",
+                          "to-gray-900/60",
+                        )
+                      }}
                     />
                   </div>
                 ))}

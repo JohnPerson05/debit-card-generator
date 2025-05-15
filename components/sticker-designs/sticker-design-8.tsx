@@ -15,7 +15,11 @@ export function StickerDesign8({ name, imageUrl }: CustomStickerProps) {
       <div className="absolute inset-0 rounded-full overflow-hidden border-4 border-orange-500">
         {/* Custom image background */}
         <div className="absolute inset-0">
-          <img src={imageUrl || "/placeholder.svg"} alt="Custom background" className="w-full h-full object-cover" />
+          {imageUrl ? (
+            <img src={imageUrl || "/placeholder.svg"} alt="Custom background" className="w-full h-full object-cover" />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-orange-900 to-black"></div>
+          )}
           <div className="absolute inset-0 bg-gradient-to-br from-orange-900/40 to-black/50"></div>
         </div>
 

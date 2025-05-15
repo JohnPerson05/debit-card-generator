@@ -26,7 +26,7 @@ export function BackgroundSpecificStickers({ name, signatureData, customBackgrou
   const BACKGROUND_OPTIONS = [
     {
       id: "default",
-      name: "Default",
+      name: "Default Gradient",
       thumbnail: "",
       image: "",
     },
@@ -56,7 +56,7 @@ export function BackgroundSpecificStickers({ name, signatureData, customBackgrou
     },
     {
       id: "combined",
-      name: "$SIGN BUILDERS",
+      name: "$SIGN BUILDER",
       thumbnail: "",
       image: "",
     },
@@ -107,10 +107,40 @@ export function BackgroundSpecificStickers({ name, signatureData, customBackgrou
     if (!stickerRef.current) return
 
     try {
+      // Wait for all images to load or fail
+      const images = Array.from(stickerRef.current.querySelectorAll("img"))
+      await Promise.all(
+        images.map(
+          (img) =>
+            new Promise((resolve) => {
+              if (img.complete) {
+                resolve(null)
+              } else {
+                img.onload = () => resolve(null)
+                img.onerror = () => {
+                  // Hide broken images and apply fallback
+                  img.style.display = "none"
+                  if (img.parentElement) {
+                    img.parentElement.classList.add("bg-gradient-to-br", "from-orange-800/40", "to-gray-900/60")
+                  }
+                  resolve(null)
+                }
+              }
+            }),
+        ),
+      )
+
       const dataUrl = await toPng(stickerRef.current, {
         quality: 1.0,
         pixelRatio: 3,
         backgroundColor: "transparent",
+        filter: (node) => {
+          // Skip problematic image nodes that might cause errors
+          if (node.tagName === "IMG" && (node as HTMLImageElement).naturalWidth === 0) {
+            return false
+          }
+          return true
+        },
       })
 
       const link = document.createElement("a")
@@ -119,6 +149,8 @@ export function BackgroundSpecificStickers({ name, signatureData, customBackgrou
       link.click()
     } catch (error) {
       console.error("Error generating sticker image:", error)
+      // Show a more user-friendly error message
+      alert("There was an error generating the sticker. Please try a different design or refresh the page.")
     }
   }
 

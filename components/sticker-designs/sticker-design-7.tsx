@@ -21,11 +21,18 @@ export function StickerDesign7({ background, signatureData }: StickerDesignProps
       case "custom":
         return (
           <div className="absolute inset-0 z-0 overflow-hidden">
-            <img
-              src={background.image || "/placeholder.svg"}
-              alt={background.name}
-              className="absolute inset-0 w-full h-full object-cover opacity-30"
-            />
+            {background.image && (
+              <img
+                src={background.image || "/placeholder.svg"}
+                alt={background.name}
+                className="absolute inset-0 w-full h-full object-cover opacity-30"
+                onError={(e) => {
+                  // If image fails to load, replace with gradient
+                  e.currentTarget.style.display = "none"
+                  e.currentTarget.parentElement!.classList.add("bg-gray-900")
+                }}
+              />
+            )}
             <div className="absolute inset-0 bg-gray-900/80"></div>
           </div>
         )
@@ -43,6 +50,11 @@ export function StickerDesign7({ background, signatureData }: StickerDesignProps
                     src={src || "/placeholder.svg"}
                     alt={`Design ${index + 1}`}
                     className="absolute inset-0 w-full h-full object-cover opacity-30"
+                    onError={(e) => {
+                      // If image fails to load, replace with gradient
+                      e.currentTarget.style.display = "none"
+                      e.currentTarget.parentElement!.classList.add("bg-gray-900")
+                    }}
                   />
                 </div>
               ))}
