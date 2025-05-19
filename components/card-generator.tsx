@@ -7,6 +7,7 @@ import { CardFront } from "./card-front"
 import { CardBack } from "./card-back"
 import { SignaturePad } from "@/components/signature-pad"
 import { StickerGenerator } from "./sticker-generator"
+import { SignPass } from "./sign-pass"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -43,7 +44,7 @@ export const BACKGROUND_OPTIONS: BackgroundOption[] = [
   },
   {
     id: "design2",
-    name: "$SIGN INTERN",
+    name: "$SIGN CUTEST",
     thumbnail:
       "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/cEmLS0J5_400x400.jpg-Su6fX7oIrTJHYVyU2l5qUmplW0hHMG.jpeg",
     image:
@@ -322,7 +323,7 @@ export function CardGenerator() {
             )}
 
             <Tabs defaultValue="front" className="w-full">
-              <TabsList className="grid w-full grid-cols-4 mb-6 bg-orange-900/30 p-1">
+              <TabsList className="grid w-full grid-cols-5 mb-6 bg-orange-900/30 p-1">
                 <TabsTrigger
                   value="front"
                   className="data-[state=active]:bg-orange-700 data-[state=active]:text-white text-orange-200"
@@ -346,6 +347,12 @@ export function CardGenerator() {
                   className="data-[state=active]:bg-orange-700 data-[state=active]:text-white text-orange-200"
                 >
                   Stickers
+                </TabsTrigger>
+                <TabsTrigger
+                  value="signpass"
+                  className="data-[state=active]:bg-orange-700 data-[state=active]:text-white text-orange-200"
+                >
+                  SIGN PASS
                 </TabsTrigger>
               </TabsList>
 
@@ -430,6 +437,10 @@ export function CardGenerator() {
                   signatureData={signatureData}
                   customBackground={customBackground}
                 />
+              </TabsContent>
+
+              <TabsContent value="signpass" className="flex flex-col items-center">
+                <SignPass name={name} designType={designType} />
               </TabsContent>
             </Tabs>
           </div>
